@@ -36,12 +36,45 @@ spec:
         type: persistent-claim
         size: 500Gi
         deleteClaim: false
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: ${{ env.NODEPOOL_K8S_LABLE_KEY }}
+                    operator: In
+                    values:
+                    - ${{ env.NODEPOOL_K8S_LABEL_VALUE }}
   zookeeper:
     replicas: 1
     storage:
       type: persistent-claim
       size: 500Gi
       deleteClaim: false
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: ${{ env.NODEPOOL_K8S_LABLE_KEY }}
+                    operator: In
+                    values:
+                    - ${{ env.NODEPOOL_K8S_LABEL_VALUE }}
   entityOperator:
     topicOperator: {}
     userOperator: {}
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: ${{ env.NODEPOOL_K8S_LABLE_KEY }}
+                    operator: In
+                    values:
+                    - ${{ env.NODEPOOL_K8S_LABEL_VALUE }}

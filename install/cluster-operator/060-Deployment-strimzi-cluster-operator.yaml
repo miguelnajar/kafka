@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: strimzi-cluster-operator
       nodeSelector:
-        nodepool: tools
+        ${{ env.NODEPOOL_K8S_LABLE_KEY }}: ${{ env.NODEPOOL_K8S_LABLE_VALUE }}
       volumes:
         - name: strimzi-tmp
           emptyDir:
