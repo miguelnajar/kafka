@@ -3,7 +3,7 @@ kind: "KafkaConnector"
 metadata:
   name: "aggregator-data-snowflake-connector"
   labels:
-    strimzi.io/cluster: "quickplay0-cluster"
+    strimzi.io/cluster: "${{ env.CLUSTER_NAME }}-cluster"
 spec:
   class: "com.snowflake.kafka.connector.SnowflakeSinkConnector"
   tasksMax: 1

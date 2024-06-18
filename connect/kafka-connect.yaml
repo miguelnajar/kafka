@@ -1,20 +1,20 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnect
 metadata:
-  name: quickplay0-cluster
+  name: ${{ env.CLUSTER_NAME }}-cluster
   annotations:
 #  # use-connector-resources configures this KafkaConnect
 #  # to use KafkaConnector resources to avoid
 #  # needing to call the Connect REST API directly
     strimzi.io/use-connector-resources: "true"
 spec:
-  image: miguelnajar/kafka-connector:0.41.0v1
+  image: ${{ env.CONNECT_IMAGE_URL }}
   version: 3.7.0
   replicas: 1
-  bootstrapServers: quickplay0-kafka-bootstrap:9093
+  bootstrapServers: ${{ env.CLUSTER_NAME }}-kafka-bootstrap:9093
   tls:
     trustedCertificates:
-      - secretName: quickplay0-cluster-ca-cert
+      - secretName: ${{ env.CLUSTER_NAME }}-cluster-ca-cert
         certificate: ca.crt
   config:
     group.id: connect-cluster

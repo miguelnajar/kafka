@@ -3,7 +3,7 @@ kind: KafkaConnector
 metadata:
   name: aggregator-data-couchbase-source
   labels:
-    strimzi.io/cluster: quickplay0-cluster
+    strimzi.io/cluster: ${{ env.CLUSTER_NAME }}-cluster
 spec:
   class: com.couchbase.connect.kafka.CouchbaseSourceConnector
   tasksMax: 1
