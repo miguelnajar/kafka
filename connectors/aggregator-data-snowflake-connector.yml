@@ -1,0 +1,25 @@
+apiVersion: "kafka.strimzi.io/v1beta2"
+kind: "KafkaConnector"
+metadata:
+  name: "aggregator-data-snowflake-connector"
+  labels:
+    strimzi.io/cluster: "quickplay0-cluster"
+spec:
+  class: "com.snowflake.kafka.connector.SnowflakeSinkConnector"
+  tasksMax: 1
+  config:
+    connector.class: "com.snowflake.kafka.connector.SnowflakeSinkConnector"
+    tasks.max: "8"
+    topics: "aggregator-data-snowflake-topic,vprogram,vschedule,live-aggregator-data-snowflake-topic"
+    snowflake.topic2table.map: "aggregator-data-snowflake-topic:vodaggregatordata,vprogram:vprogram,vschedule:vschedule,live-aggregator-data-snowflake-topic:liveaggregatordata"
+    buffer.count.records: "10000"
+    buffer.flush.time: "60"
+    buffer.size.bytes: "5000000"
+    snowflake.url.name: "fj49425.west-us-2.azure.snowflakecomputing.com:443"
+    snowflake.user.name: "amd_cet_prod"
+    snowflake.private.key:  "MIIFLTBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIzd2d/+WV0ukCAggAMAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAEqBBAD7IwIjndKhQ6VNpotuZkJBIIE0EpY0zTtJhPayqtbaW3GHVCJNQ48wpj4NqaWr8SmKEiDoDUvkWUXY9u8ysq+Bd00GKU/Xpw/0HYUHv/drVPbgDOkyZFHyOxirYwSbKaIEtKzOKG6L5NIjw2V3RDuNjl07HWsQ+6Ytb52rMn8W4u3X77G9QjZSIJ00zrZ/CqdQnKHrHnEhSLsjf+tCfQns+f4ispRuA0jXyzhDim6+SohkhbLenLiCBEn+BNXnnY6/3MaqEfpxJ68Q+YK0aSiXxDLcuwMssVxhDrZhrBIXjsJ5vcYkwqL9oG8tMRNulmJITfTHIkhiSCNRi7SHruRBPob3GGARg+LnOHxxKglSpI+tVqKkb/TSG2AbuG5BYmSS28ugmgYoW6q+pJGbLkZvVKNX8SOU0hixCwx5HDzQwD50VsyTphhy93lNMIr79wDowerYJWyTSZ1k8rku4DUAG+qu8m3ePxwI4hSOGMkPEWuZf9aggwfm0ci5l19kV5b/It3WVEMd4z8t+3tsWxEhLU4P4wBCTyQB0Qv1NNEVl3VVfzNGa0gBwoGyF+sEwmJqFRpxKOROfwhUUuLqAkCOwo3ovV0K6UEIbvgD0zH0pqZyEIQ4Qepozn3HRMZEgzP/NyPOo4xygOvT3mELhaO0PvIafmx/X6rWR/ThzQHUCT/yIHxAr/iF+XYEYEMm0u8Mk8vejBiASp/6Y4qF4ST+x08DioPwHrjGoByuVApnGXzC8gYiSm+RhmoF+M7YEo14LJ4VP2riNvOueG2jnNOakXMM5oLvpDjZKN+Qxhh14Cj4JYS52ek36rDKtveewnHXhAGUeS1sIc5YQ6FHcw1sRi3Tgn8+SYkQWp+RpruX4xJOcnUw3Mf1cPaPHY3sRQp7D+b/jv9zWGNo/G7RP5WUeLCxDIG6PewIFCJws9Q+Oyx7mOoUKfaoxvX0fVqIk8WxbmL6n1B6IjUTvxn+TpWttcST0YU6199imrql/4iMqVN1awF+RDRs5aHMZleV+KxpP45dZYBykg/9FDckjFtnwAyUBo3QwP+qyNcR62gzhWfsvg30BtPPX/lRrqSE561DqEDJ44ApmFRThlx0V7Ohe076+oeGGiTMLL0FI+Z/VYPupiU2+SIcOxD+iQfdoh0+ZYZsVy0ivi1sJf2wqduKbMtr4dOBEI215YrE6mCtcN5Xk3NaB2TcL97m8W2kx8YrS6LCKPtVnk3s7OQc75Bc5FeHVa9LSCR3VkEQZIoCx7nlyxSVt6zSH+lrWa30dSOKttWs95k4nZY9J186tkmbTbxv9fHa1NxIWBNT2QiiKCT6XGoUzn4uwMaZxhuVlDNw4PDt9rjq1E6789pWuhnKiWOQauyKboi+XuLy4vgrXWhzGjItB5t7TU9hDxEEBVy5BGtP8l4nelJTw/UnLJENulvKYY6wCSfBs2CTnar+G9K8k+u8WzMRMMI7qdjA34MMk8vq3QeHOkWtEUDT2tcc/UokdWN86GvDkRujadgElmY4gEfTDdM+JMShFCUObWDjHxfu4Lfe8ltV6DBA1K97aq6iFbYvO590oLPJy6Th5SZHWkomER/oUxhOLMBJ8PAmjkqusiGDxN584tojMDROgR7p5sMkZTXYlX+Fb6+BsbbkX4fQqzlVZIfQOpVSquBQPO3"
+    snowflake.private.key.passphrase: "amdcasdgqjcet"
+    snowflake.database.name: "amd"
+    snowflake.schema.name: "cet_prod"
+    key.converter: "org.apache.kafka.connect.storage.StringConverter"
+    value.converter: "com.snowflake.kafka.connector.records.SnowflakeJsonConverter"
