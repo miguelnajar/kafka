@@ -32,7 +32,6 @@ spec:
     socket.receive.buffer.bytes: 10485760
     message.max.bytes: 10485760
     max.partition.fetch.bytes: 10485760
-    socket.request.max.bytes: 104857600
   template:
     pod:
       affinity:
