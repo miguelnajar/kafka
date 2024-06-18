@@ -4,7 +4,7 @@ RUN mkdir -p /opt/kafka/plugins/debezium
 RUN mkdir -p /opt/kafka/plugins/snowflake
 RUN mkdir -p /opt/kafka/plugins/couchbase
 RUN mkdir -p /opt/kafka/plugins/pubsub
-# copy the properties files and jars
+# Copy the properties files and jars
 COPY ./plugins/debezium-connector-mysql-2.6.2/ /opt/kafka/plugins/debezium/
 COPY ./plugins/snowflake-kafka-connector-2.2.2/ /opt/kafka/plugins/snowflake/
 COPY ./plugins/couchbase-kafka-connect-couchbase-4.2.2/lib/ /opt/kafka/plugins/couchbase/
