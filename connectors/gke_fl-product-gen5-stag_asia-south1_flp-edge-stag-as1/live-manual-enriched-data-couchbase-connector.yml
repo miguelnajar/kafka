@@ -1,17 +1,17 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata:
-  name: aggregator-data-couchbase-source
+  name: live-manual-enriched-data-couchbase-source
   labels:
-    strimzi.io/cluster: ${{ env.CLUSTER_NAME }}-cluster
+    strimzi.io/cluster: quickplay1-cluster
 spec:
   class: com.couchbase.connect.kafka.CouchbaseSourceConnector
   tasksMax: 1
   config:
-    couchbase.topic: aggregator-data-snowflake-topic
-    couchbase.seed.nodes: cb1.api.cms.amdvids.local,cb2.api.cms.amdvids.local,cb3.api.cms.amdvids.local
+    couchbase.topic: live-manual-enriched-data-topic
+    couchbase.seed.nodes: "cb1.product-stag.firstlight.ai,cb2.product-stag.firstlight.ai,cb3.product-stag.firstlight.ai"
     couchbase.bootstrap.timeout: 20s
-    couchbase.bucket: aggregator-data
+    couchbase.bucket: live-manual-enriched-data
     couchbase.username: kafkasource
     couchbase.password: kafkasource
     couchbase.source.handler: com.couchbase.connect.kafka.handler.source.DefaultSchemaSourceHandler

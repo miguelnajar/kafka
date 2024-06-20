@@ -1,0 +1,25 @@
+apiVersion: "kafka.strimzi.io/v1beta2"
+kind: "KafkaConnector"
+metadata:
+  name: "aggregator-data-snowflake-connector"
+  labels:
+    strimzi.io/cluster: "quickplay1-cluster"
+spec:
+  class: "com.snowflake.kafka.connector.SnowflakeSinkConnector"
+  tasksMax: 1
+  config:
+    connector.class: "com.snowflake.kafka.connector.SnowflakeSinkConnector"
+    tasks.max: "8"
+    topics: "aggregator-data-topic"
+    snowflake.topic2table.map: "aggregator-data-topic:vodaggregatordata"
+    buffer.count.records: "10000"
+    buffer.flush.time: "60"
+    buffer.size.bytes: "5000000"
+    snowflake.url.name: "hs90131.ap-southeast-1.snowflakecomputing.com:443"
+    snowflake.user.name: "cet_stg"
+    snowflake.private.key: "MIIFLTBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIXVN9ETIGM4gCAggAMAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAEqBBD4nYS3Srn6CanaINWHcvI0BIIE0M0W/0Y4rd/8qFKBHs7ewZ5GeTzh+UTvMPsIxp9CMJhkQaF0kYb5fz0s4/Zr0w97GogpFatIXijfHNeT9TtIH/R4ehYlRWkWkGGUokPlNFmwr1K95sPs3seZXR1ozS1jjZRMYY5IxfxRCALm8LyJy0QtPiJiM2Olpe5/s+H9PSiIMFgdNrzYU1SrnEJj6TcudS/cy6dHuzHcRSjtI8cJGmD+YXaGR/P+Z+/dX+FoHFxssqXfSwqz25EChDvlTMWlDKQbTSaaTyZrhcX3b0vcH2dOZjwt+TqMOP6AQ9kyMpQBFhciSjVRNNX3Ge4PMvsQCuPfKsd+ZDvtfvvdAXSxsbqPnOU9rdNgYmwLgjOASOatbFi9yGAju+jg/a1X+io4QAD6msSzySkYVLOp1EQIywj2JGVEYrA9Oo2G3Y04Rl0xbgkGQ58zXvaXlG8nmQzoVU39iI0wLWyfH3UQABz8IBYhME1imGuVK3DuLUsiS+RyHD5xKdQV5ORHmyfdjZoAJ62E1DpFCWdMS+PvPm4hfG4VNkSot75BuVZU3OFbCPDM+HJOUPYtEvKQiy1nd9Q2JCX6/XcV7M8m5CEa2PDYVnDFbzlliz8wvFo6zNk/mXmCi41tKzjggZuB/k7gF0TkMWRngZMyTLj0Rw+b0AquHDjsQ1MlvrdB0Opzvg5fjxvkzf/zTvXOS5stWCQKD0LqBZg3jY7pWDOIBOhlDf5XTdPxOMuENdFlui3YEbhTaRGLEh2agu3CVHI4exO9r0UbXQIJXcZVW+0P4WrhEpAKeRT1Cb+MkMV2ZRxpbHlWorVk+rkt742FhDaxoKVaA93IiEVqFt74iP3TW0VO2mvLRKK5+1rZ4haVYr9TXjPa890lLVkR+sIWiyVNEw6afqOZuieloTe3dpL2lNdbUd8gJ80y0dOfXtuUFuhwN25blbW24lyFiK8pfakcquRAGXAtHjX9EriR3nnlbfz0hera3zKFehycGCTPhfh1lv7FAS8KLWDxJ5CRmCO+Wep9//EjVmztpAcDk+oxLuJPBDv7qbzNirgdPWNyMwL2J8MFz8hrpV4ZeqTGBBrma/101eYiau9mB4f7itKHGL04udDwu+qrDOqzB1/pSeqsKb765wkkKP8jUpGM2krpAG6UepFRQwouS4YaqonZOybMAfcUuUmRYvj+IVhPRGO9ATxNAOKUITU6wAydhpLXGb02+nXp5/mRkfSfn8NaG/lfYuaP63ZdFU0fep3Zvw5icroRxrbk+PuPGn/EpJJLpd+61UNbLuheCwtjd5MhExyl3Bc0OfpsjUne5u+7bV3biqC8s2rU5Wbsy+72c5nTLl1dgonphPlcdDr/X2Afl+hdeaOW2+lcwKVJD/pZq/EkyPKMlw/xFlGIAMTz8ufVblU2xMpcP0Hw9xoCnSyd8IX83t8V14eaNZGskK6o/jCYMHQoR+EAR+PWd8L/pqbMKLrVdyIIaqvskru82zU9Nc1cw6gMIBSVXI1E46Mm92Og2kr0crJveymifgkLW+fl6edxwntq85YYEL6KXgEd2yWOKZA1nsxd4X9iCY7owGG3Bhwfy7lmenSUQrgb9lDtAygrRiqZmn1+3vMk3wJNxLKlgSZqxLvSWjdOCxBD9SRYs++pqaY9"
+    snowflake.private.key.passphrase: "pldt1data!"
+    snowflake.database.name: "pldt_staging"
+    snowflake.schema.name: "cet_stg"
+    key.converter: "org.apache.kafka.connect.storage.StringConverter"
+    value.converter: "com.snowflake.kafka.connector.records.SnowflakeJsonConverter"

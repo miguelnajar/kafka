@@ -1,0 +1,18 @@
+apiVersion: "kafka.strimzi.io/v1beta2"
+kind: "KafkaConnector"
+metadata:
+  name: "live-content-pubsub-connector"
+  labels:
+    strimzi.io/cluster: "quickplay1-cluster"
+spec:
+  class: "com.google.pubsub.kafka.sink.CloudPubSubSinkConnector"
+  tasksMax: 1
+  config:
+    connector.class: "com.google.pubsub.kafka.sink.CloudPubSubSinkConnector"
+    tasks.max: "10"
+    topics: "live-content-topic"
+    cps.project: fl-product-gen5-stag
+    cps.topic: live-content
+    gcp.credentials.json: "{\"type\": \"service_account\", \"project_id\": \"fl-product-gen5-stag\", \"private_key_id\": \"35bf67ae56c3bf6064f2164bf2ddccdc822685d2\", \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCoUxMCAOIkZhIW\\nv+wWtpZ7v+oIcEy92V8rjk0VJb+MzsOcH9+dBjNBH1nUP5sV4ROtpf6lA2BiiVQs\\nVd7EBEi9SAi0B+Wci3FJV78bz6q12hpdpQh7N4ROkWk6zlF53JZJ6LSMK8tDMkF/\\nBcvumR4c+vHk5dGxIZvNyXcWpJfrSFhNF2RHsKiQL9C/bxdyzkPzqf4UKp5lk2Eo\\nqILgKaNEhfNdvCyH23SJF+2xBYYj/AO820hafnd4R+FcoWQQ6Zw9mUJiMns8IGK8\\nFMEojYoEVgpq640c0XJUMBshDXQfrL1p/J+82hy3UrlI0FEkFRQsxIC6GlGIEcjM\\nfCb5yN/5AgMBAAECggEAQMNh41nyqJ2LJSynyh9ra+atxZxrsnoRt4DzYIkbF7Kw\\nKYBL+a8ahlppJhRo97SXbS8aeGQBsDf1Zm+Nm+6oDAfMrXQCYMZ4CoeT1MAEhx6J\\nGXG3fy0fn1ksWz9pstDwFDTQTsRE2zBZaeWRjtZj8zOMYY0ZLqVnPHjg9JnUh+Y3\\nbuOu45bMOebuOtJ+TJ/ztL3Nn6HErU8VHtESUeO2a7QEq9qBu51pRLQp3LpFZz5h\\nLPhOEcjjFCh8UDe3+pA+Y8ZfjyqB81YxTGqFiivNVKfoEMm07bwOEK1OAdxK/ONh\\nmp8My0KEab5qzB9QdAlp6V3+yz0xmI+e5LVpVe7/TwKBgQDrX4wxalgZMc0FjUhx\\nxbgLZxO+vGuGpJxW98e3L35yg+8G/Wjg4DabcDITelX/dqyg+mp3vmDT004kNnDg\\ntQ/bq9F2+AafTgmMjt0BLIs4FHukBPv/dAd5EBPx6Pil2HnKdbaW6UoDuGlrhVub\\ndyXoHqaM3EBCe7Qd8FAeGLv+KwKBgQC3E1SCbpXjU+WU8D5sTaAg/56as1fhJdj9\\nOiu27HDurPsLGVernWs+d/oBIRMhe2CXCUUKwymlXBhjtsAbnioURC/521xXUy5e\\nZDSZGTL16kwcVCk7hXAsAspMteH75X92nJHb8wRnGzfbsy4qE0XNxCMEXfnt2ieS\\nA3lpUbLsawKBgQCIt0gkT+P6Rm4TInyI8VK09NuIN8OxQp44+dW8ts6Yz7+gbMNl\\nk3bElMfRfobDS3h8TNhY03FEuQEzkZfBPgqHC2cw1mJqWBa92SHQE8KOAX/LxsVl\\nHU1V6ZvcMPl0w6gCjJtRTxKZ1J0PQjfytqODD4KoYSrGMzptBXBT+wP/XwKBgQCw\\nNB2hkBgZfTU5fWVHTgsx13VqxfRuEcRgLW3HmJg1UC4rh4+28EM5E7Z/Abts/VeA\\n5v4Zlq9tpU8gIdOSgU9UxDA81iFxNvEpDl8Ff5hp0cDBf0tUK2FEKsdUv7YqgL+G\\nhLlqLeLt7ed8QF/NRVFo8z8Uw/J6N/7f7RIdCPIh0wKBgEhxW+11LBw899G7+Q5r\\niuhdrdSXd6JRiFWIEMTjYWF9rFT0hoUBufvHMGAoWeyIvuSiw07kN0kWJgLGLg7v\\ncOwjDocP5qBU1p/hfGRiZbU0qnK7Tg4hjb5TGVoiQmCUdI7adgd4FpQ1Zi+jlN8v\\niwvqHdLkW9RvUEpEZNJEhwmD\\n-----END PRIVATE KEY-----\\n\", \"client_email\": \"kafka-pubsub-sa@fl-product-gen5-stag.iam.gserviceaccount.com\", \"client_id\": \"110266725804886827320\", \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\", \"token_uri\": \"https://oauth2.googleapis.com/token\", \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\", \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/kafka-pubsub-sa%40fl-product-gen5-stag.iam.gserviceaccount.com\"}"
+    key.converter: "org.apache.kafka.connect.storage.StringConverter"
+    value.converter: "org.apache.kafka.connect.storage.StringConverter"

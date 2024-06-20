@@ -1,0 +1,22 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: aggregator-data-couchbase-source
+  labels:
+    strimzi.io/cluster: quickplay1-cluster
+spec:
+  class: com.couchbase.connect.kafka.CouchbaseSourceConnector
+  tasksMax: 1
+  config:
+    couchbase.topic: aggregator-data-topic
+    couchbase.seed.nodes: "cb1.product-stag.firstlight.ai,cb2.product-stag.firstlight.ai,cb3.product-stag.firstlight.ai"
+    couchbase.bootstrap.timeout: 20s
+    couchbase.bucket: aggregator-data
+    couchbase.username: kafka-snfcb-integration
+    couchbase.password: kafka-snfcb-integration
+    couchbase.stream.from: NOW
+    couchbase.compression: ENABLED
+    couchbase.flow.control.buffer: 128m
+    couchbase.persistence.polling.interval: 100ms
+    couchbase.source.handler: com.couchbase.connect.kafka.handler.source.DefaultSchemaSourceHandler
+    couchbase.event.filter: com.couchbase.connect.kafka.filter.AllPassFilter

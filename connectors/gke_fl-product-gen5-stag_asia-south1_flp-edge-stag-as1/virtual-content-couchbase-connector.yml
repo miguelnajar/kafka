@@ -1,0 +1,25 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: virtual-content-couchbase-source
+  labels:
+    strimzi.io/cluster: quickplay1-cluster
+spec:
+  class: com.couchbase.connect.kafka.CouchbaseSourceConnector
+  tasksMax: 1
+  config:
+    #couchbase.topic: virtual-content-topic._default.vprogram
+    couchbase.collection.to.topic: "_default.fillerconfig=fillerconfig,_default.vprogram=vprogram,_default.vschedule=vschedule"
+    #couchbase.collection.to.topic: "_default.vschedule=vschedule,_default.vprogram=vprogram,_default.fillerconfig=fillerconfig"
+    couchbase.seed.nodes: "cb1.product-stag.firstlight.ai,cb2.product-stag.firstlight.ai,cb3.product-stag.firstlight.ai"
+    couchbase.bootstrap.timeout: 20s
+    couchbase.bucket: virtual-content
+    couchbase.username: kafkasource
+    couchbase.password: kafkasource
+    #couchbase.default_collection: _default._default
+    couchbase.source.handler: com.couchbase.connect.kafka.handler.source.DefaultSchemaSourceHandler
+    couchbase.event.filter: com.couchbase.connect.kafka.filter.AllPassFilter
+    couchbase.stream.from: NOW
+    couchbase.compression: ENABLED
+    couchbase.flow.control.buffer: 128m
+    couchbase.persistence.polling.interval: 100ms
